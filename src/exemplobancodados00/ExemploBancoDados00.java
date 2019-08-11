@@ -20,17 +20,17 @@ public class ExemploBancoDados00 {
         
         try {
            Connection conexao = DriverManager
-                   .getConnection("jdbc:mysql://localhost:3306/exemplo_01", "root", ""); 
+                   .getConnection("jdbc:mysql://localhost:3306/exemplo_01", "root", "root"); 
            
            String nome = JOptionPane.showInputDialog("Digite o nome");
            String cpf = JOptionPane.showInputDialog("Digite o CPF");
            
 //         inserir registro na tabela de clientes
-//         PreparedStatement ps = conexao.prepareStatement(
-//                 "INSERT INTO clientes (nome, cpf) VALUES (?, ?)"); 
-//         ps.setString(1, nome);
-//         ps.setString(2, cpf);
-//         ps.execute();
+         PreparedStatement ps = conexao.prepareStatement(
+                 "INSERT INTO clientes (nome, cpf) VALUES (?, ?)"); 
+         ps.setString(1, nome);
+         ps.setString(2, cpf);
+         ps.execute();
             
 //         alterar registro na tabela de cliente
 //         PreparedStatement ps = conexao.prepareStatement(
@@ -49,7 +49,7 @@ public class ExemploBancoDados00 {
 //         apagar registro na tabela do clliente
 //         PreparedStatement ps = conexao.prepareStatement("delete from clientes where id = ?");
 //           
-//           int id = 2;
+//           int id = 5;
 //           ps.setInt(1, id);
 //           int quantidadeAfetada = ps.executeUpdate();
 //           JOptionPane.showMessageDialog(null, quantidadeAfetada == 1 ? "Apagou com sucesso" : "Nao foi possivel apagar");
@@ -60,7 +60,8 @@ public class ExemploBancoDados00 {
             ResultSet tabelaEmMemoria = st.getResultSet();
             while (tabelaEmMemoria.next()){
                 String nomeCliente = tabelaEmMemoria.getString("nome");
-                System.out.println(nomeCliente);
+                String cpfCliente = tabelaEmMemoria.getString("cpf");
+                System.out.println(nomeCliente + " - " + cpfCliente);
             }
 
         } catch (Exception e) {
